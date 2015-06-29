@@ -1,3 +1,5 @@
-const dir = dirname(@__FILE__)
-const path = realpath(joinpath(dir, readall(joinpath(dir, "path"))))
-run(app) = readandwrite(`$path $app`)
+const path = joinpath(dirname(@__FILE__), "deps/dist", {
+  :Darwin => "Electron.app/Contents/MacOS/Electron",
+  :Windows => "electron.exe",
+  :Linux => "electron"
+}[OS_NAME]) |> realpath
