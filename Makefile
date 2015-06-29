@@ -1,13 +1,13 @@
-path: src/Electron.jl
+deps/dist:
 	@cd deps && julia build.jl
 
 install:
 	@julia -e 'symlink(pwd(), Pkg.dir("Electron"))'
 
-test: path
-	@julia -e 'import Electron;Electron.run("test-app")'
+test: deps/dist
+	@julia -e 'import Electron;run(`$$(Electron.path) test-app`)'
 
 clean:
-	rm -r deps/dist deps/*.zip path
+	rm -r deps/dist deps/*.zip
 
 .PHONY: test install clean
