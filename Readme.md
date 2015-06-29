@@ -10,13 +10,9 @@ Pkg.add("Electron")
 
 ## API
 
+This package provides one variable, `path`. Which is the path to the Electron executable
+
 ```julia
 import Electron
-stdin,stdout,process = Electron.run("path/to/your/app")
+stdin,process = open(`$(Electron.path) path/to/your/app`, "w")
 ```
-
-The app you pass to `run` must be a normal electron app written in JavaScript. Though you can drive it from Julia via the Process's stdio streams.
-
-## Todo
-
-- [ ] Provide a `rebrand` function
