@@ -1,3 +1,3 @@
 module Electron
-include("../index.jl")
+include("../main.jl")
 end

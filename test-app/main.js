@@ -1,9 +1,10 @@
-var Window = require('browser-window')
-var app = require('app')
+const {app, BrowserWindow} = require('electron')
 
-app.on('window-all-closed', function() { app.quit() })
+app.on('window-all-closed', () => {
+  if (process.platform != 'darwin') app.quit()
+})
 
-app.on('ready', function() {
-  var mainWindow = new Window({width: 800, height: 600})
-  mainWindow.loadUrl('file://' + __dirname + '/index.html')
+app.on('ready', () => {
+  const window = new BrowserWindow({width: 800, height: 600})
+  window.loadURL('file://' + __dirname + '/index.html')
 })
