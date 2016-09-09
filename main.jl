@@ -1,6 +1,10 @@
 const base = joinpath(dirname(@__FILE__), "deps")
 
-install(version::VersionNumber) = begin
+"""
+Download a specific `version` Electron into `base` and return the full path
+to its executable binary
+"""
+install(version::VersionNumber, base=base) = begin
   isdir(base) || mkdir(base)
   filename = "electron-v$version-$(lowercase(string(OS_NAME)))-x$WORD_SIZE.zip"
   url = "https://github.com/atom/electron/releases/download/v$version/$filename"
@@ -18,7 +22,6 @@ install(version::VersionNumber) = begin
     :Linux => "electron"
   )[Sys.KERNEL]) |> realpath
 end
-
 
 latest() = begin
   header = readall(`curl -s --head https://github.com/electron/electron/releases/latest`)
