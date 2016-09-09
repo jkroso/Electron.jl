@@ -1,7 +1,4 @@
-install:
-	@julia -e 'symlink(pwd(), Pkg.dir("Electron"))'
-
 test:
-	@julia -e 'import Electron;run(`$$(Electron.install(Electron.latest())) test-app`)'
+	@julia -e '@require "." install latest;run(`$$(install(latest())) test-app`)'
 
-.PHONY: test install
+.PHONY: test
