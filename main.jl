@@ -24,6 +24,6 @@ install(version::VersionNumber, base=base) = begin
 end
 
 latest() = begin
-  header = readall(`curl -s --head https://github.com/electron/electron/releases/latest`)
+  header = readstring(`curl -s --head https://github.com/electron/electron/releases/latest`)
   VersionNumber(match(r"v(\d+\.\d+\.\d+)", header)[1])
 end
