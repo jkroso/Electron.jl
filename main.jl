@@ -6,7 +6,7 @@ to its executable binary
 """
 install(version::VersionNumber, base=base) = begin
   isdir(base) || mkdir(base)
-  filename = "electron-v$version-$(lowercase(string(OS_NAME)))-x$WORD_SIZE.zip"
+  filename = "electron-v$version-$(lowercase(string(Sys.KERNEL)))-x$(Sys.WORD_SIZE).zip"
   url = "https://github.com/atom/electron/releases/download/v$version/$filename"
   filepath = joinpath(base, filename)
   dirpath = filepath[1:end-4]
