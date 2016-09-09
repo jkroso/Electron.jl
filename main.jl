@@ -16,7 +16,7 @@ install(version::VersionNumber) = begin
     :Darwin => "Electron.app/Contents/MacOS/Electron",
     :Windows => "electron.exe",
     :Linux => "electron"
-  )[OS_NAME]) |> realpath
+  )[Sys.KERNEL]) |> realpath
 end
 
 
