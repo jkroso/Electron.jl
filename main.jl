@@ -1,10 +1,11 @@
-const base = joinpath(dirname(@__FILE__), "deps")
+const base_path = joinpath(dirname(@__FILE__), "deps")
+const app_path = joinpath(dirname(@__FILE__), "app")
 
 """
 Download a specific `version` Electron into `base` and return the full path
 to its executable binary
 """
-install(version::VersionNumber, base=base) = begin
+install(version::VersionNumber, base=base_path) = begin
   isdir(base) || mkdir(base)
   filename = "electron-v$version-$(lowercase(string(Sys.KERNEL)))-x$(Sys.WORD_SIZE).zip"
   url = "https://github.com/atom/electron/releases/download/v$version/$filename"
@@ -27,3 +28,11 @@ latest() = begin
   header = readstring(`curl -s --head https://github.com/electron/electron/releases/latest`)
   VersionNumber(match(r"v(\d+\.\d+\.\d+)", header)[1])
 end
+
+type App
+  title::String
+  stdin::IO
+  proc::Base.Process
+end
+
+App(title; version=latest()) = App(title, open(`$(install(version)) $app_path`, "w")...)
