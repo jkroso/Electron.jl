@@ -5,9 +5,10 @@ Provides easy access to [atom/electron](//github.com/atom/electron) from Julia
 ## Installation
 
 ```julia
-Pkg.clone("https://github.com/jkroso/Electron.jl.git")
-Pkg.build("Electron")
+@require "github.com/jkroso/Electron.jl" => Electron
 ```
+
+See [Rutherford.jl](//github.com/jkroso/Rutherford.jl) for example usage
 
 ## API
 
@@ -23,4 +24,12 @@ Installs a given version of Electron and returns the path to its executable
 import Electron
 electron = Electron.install(Electron.latest())
 stdin,process = open(`$electron path/to/your/app`, "w")
+```
+
+### App
+
+Boots up an Electron app which can have messages written to its `stdin` in order to open windows
+
+```
+const app = App("Electron")
 ```
