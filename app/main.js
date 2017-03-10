@@ -15,6 +15,7 @@ readline.createInterface({
 }).on('line', line => {
   const msg = JSON.parse(line)
   ready.then(() => {
+  	'icon' in msg && app.dock.setIcon(msg.icon)
     const window = new BrowserWindow(msg)
     if (msg.console) window.openDevTools()
     window.loadURL(`data:text/html,<!DOCTYPE html>${msg.html}`)
