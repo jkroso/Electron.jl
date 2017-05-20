@@ -1,5 +1,5 @@
-const base_path = joinpath(dirname(@__FILE__), "deps")
-const app_path = joinpath(dirname(@__FILE__), "app")
+const base_path = joinpath(@__DIR__, "deps")
+const app_path = joinpath(@__DIR__, "app")
 
 """
 Download a specific `version` Electron into `base` and return the full path
@@ -29,7 +29,7 @@ latest() = begin
   VersionNumber(match(r"v(\d+\.\d+\.\d+)", header)[1])
 end
 
-type App
+struct App
   title::String
   stdin::IO
   proc::Base.Process
