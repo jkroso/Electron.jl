@@ -2,8 +2,7 @@ const base_path = joinpath(@__DIR__, "deps")
 const app_path = joinpath(@__DIR__, "app")
 
 """
-Download a specific `version` Electron into `base` and return the full path
-to its executable binary
+Ensure Electron@version is installed and return the path to its executable
 """
 install(version::VersionNumber, base=base_path) = begin
   isdir(base) || mkdir(base)
