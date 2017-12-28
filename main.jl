@@ -35,3 +35,5 @@ struct App
 end
 
 App(title; version=latest()) = App(title, open(`$(install(version)) $app_path`, "w")...)
+
+Base.wait(a::App) = wait(a.proc)
