@@ -24,8 +24,8 @@ install(version::VersionNumber, base=base_path) = begin
 end
 
 latest() = begin
-  header = readstring(`curl -s --head https://github.com/electron/electron/releases/latest`)
-  VersionNumber(match(r"v(\d+\.\d+\.\d+)", header)[1])
+  header = read(`curl -s --head https://github.com/electron/electron/releases/latest`, String)
+  VersionNumber(match(r"tag/v(\d+\.\d+\.\d+(?:-[^\r]+)?)", header)[1])
 end
 
 struct App
