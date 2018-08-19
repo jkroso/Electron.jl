@@ -30,10 +30,9 @@ end
 
 struct App
   title::String
-  stdin::IO
   proc::Base.Process
 end
 
-App(title; version=latest()) = App(title, open(`$(install(version)) $app_path`, "w")...)
+App(title; version=latest()) = App(title, open(`$(install(version)) $app_path`, "w"))
 
 Base.wait(a::App) = wait(a.proc)
