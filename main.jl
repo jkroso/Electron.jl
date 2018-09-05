@@ -16,10 +16,10 @@ install(version::VersionNumber, base=base_path) = begin
   # metadata about each file to extract them correctly
   isdir(dirpath) || run(`unzip -ou $filepath -d $dirpath`)
 
-  joinpath(dirpath, Dict(
-    :Darwin => "Electron.app/Contents/MacOS/Electron",
-    :Windows => "electron.exe",
-    :Linux => "electron"
+  joinpath(dirpath, (
+    Darwin = "Electron.app/Contents/MacOS/Electron",
+    Windows = "electron.exe",
+    Linux = "electron"
   )[Sys.KERNEL]) |> realpath
 end
 
